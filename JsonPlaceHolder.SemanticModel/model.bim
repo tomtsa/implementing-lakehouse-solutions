@@ -1,0 +1,449 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.138.1452.0 (24.11)"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"jsonplaceholder dim_users\",\"jsonplaceholder fact_comments\",\"jsonplaceholder fact_posts\"]"
+      }
+    ],
+    "culture": "en-GB",
+    "cultures": [
+      {
+        "name": "en-GB",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "de85dadc-b2eb-5899-47c9-a1d0ae6bf7d5",
+        "fromColumn": "postId",
+        "fromTable": "jsonplaceholder fact_comments",
+        "toColumn": "id",
+        "toTable": "jsonplaceholder fact_posts"
+      },
+      {
+        "name": "9f3a159f-2584-d697-6790-dd2bc15a4671",
+        "fromColumn": "userId",
+        "fromTable": "jsonplaceholder fact_posts",
+        "toColumn": "id",
+        "toTable": "jsonplaceholder dim_users"
+      },
+      {
+        "name": "1d8c759f-478d-bc7a-9228-9ba47cf4f4b9",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "email",
+        "fromTable": "jsonplaceholder dim_users",
+        "isActive": false,
+        "toColumn": "email",
+        "toTable": "jsonplaceholder fact_comments"
+      }
+    ],
+    "sourceQueryCulture": "en-FI",
+    "tables": [
+      {
+        "name": "jsonplaceholder dim_users",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "3cc83736-84e1-4f7a-acab-6edc9aa9b180",
+            "sourceColumn": "id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "email",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a7e7ee20-1d31-4467-aee7-e1782461a4b1",
+            "sourceColumn": "email",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b0cf7d66-c334-4c64-b797-d865a661d213",
+            "sourceColumn": "name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "phone",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9f3155ae-1b40-47cb-9744-5f9208cf2e51",
+            "sourceColumn": "phone",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "username",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "890e1dbc-9c71-4e82-8c0e-18c17d6d2824",
+            "sourceColumn": "username",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "website",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9caa896d-b108-4263-a82f-f5996bf9ce92",
+            "sourceColumn": "website",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "172f0f9f-e3ab-4c8c-ab20-01ee19952a77",
+        "partitions": [
+          {
+            "name": "jsonplaceholder dim_users",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"pepxpdnv2zlefkhfcgz5ovc2tq-sv76v3srkxou5mhylagf6dhscu.datawarehouse.fabric.microsoft.com\"),",
+                "    LH_Gold = Source{[Name=\"LH_Gold\"]}[Data],",
+                "    jsonplaceholder_dim_users = LH_Gold{[Schema=\"jsonplaceholder\",Item=\"dim_users\"]}[Data]",
+                "in",
+                "    jsonplaceholder_dim_users"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "jsonplaceholder fact_comments",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "body",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "def60c15-c783-4090-82d6-5eda457a55b9",
+            "sourceColumn": "body",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "email",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f58c13bb-72e1-4b1c-9379-8bcb67792da7",
+            "sourceColumn": "email",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "48b2091f-8dbd-45f6-9413-1b144f5ddefb",
+            "sourceColumn": "id",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1385ac25-5e9b-43af-be51-342563836b78",
+            "sourceColumn": "name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "postId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "558da927-25a4-42fa-a7dd-2831587c4456",
+            "sourceColumn": "postId",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "6b797cf3-0c61-4230-b401-d9f08bea49c5",
+        "partitions": [
+          {
+            "name": "jsonplaceholder fact_comments",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"pepxpdnv2zlefkhfcgz5ovc2tq-sv76v3srkxou5mhylagf6dhscu.datawarehouse.fabric.microsoft.com\"),",
+                "    LH_Gold = Source{[Name=\"LH_Gold\"]}[Data],",
+                "    jsonplaceholder_fact_comments = LH_Gold{[Schema=\"jsonplaceholder\",Item=\"fact_comments\"]}[Data]",
+                "in",
+                "    jsonplaceholder_fact_comments"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "jsonplaceholder fact_posts",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "body",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "393b7b45-f522-47c8-8fa8-9c46c33b10ee",
+            "sourceColumn": "body",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c028ba2d-9085-48fc-8fce-f83dc0c032c2",
+            "sourceColumn": "id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "title",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b068ab36-5d8c-4a38-9ba0-cd3e1b4f7370",
+            "sourceColumn": "title",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "userId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0adb6c04-83b2-4676-9e33-a8eaed8b758c",
+            "sourceColumn": "userId",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "5f790169-93c8-4952-96e3-e7be7d87d588",
+        "partitions": [
+          {
+            "name": "jsonplaceholder fact_posts",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"pepxpdnv2zlefkhfcgz5ovc2tq-sv76v3srkxou5mhylagf6dhscu.datawarehouse.fabric.microsoft.com\"),",
+                "    LH_Gold = Source{[Name=\"LH_Gold\"]}[Data],",
+                "    jsonplaceholder_fact_posts = LH_Gold{[Schema=\"jsonplaceholder\",Item=\"fact_posts\"]}[Data]",
+                "in",
+                "    jsonplaceholder_fact_posts"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MeasuresTable",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "06153f509db74bd9879addeea2d1a0a0"
+          },
+          {
+            "name": "436ba87b-9c83-4389-a31b-ebd06a36be98",
+            "value": "{\"Expression\":\"\"}"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Column",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "ea534977-b850-4a49-b42e-ba0087e9c278",
+            "sourceColumn": "[Column]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "0e93bf16-d00c-4e42-a2db-fb80014dbcc2",
+        "measures": [
+          {
+            "name": "CountPost",
+            "expression": "count('jsonplaceholder fact_posts'[id])",
+            "formatString": "0",
+            "lineageTag": "fd308c9d-6ae6-4300-b91d-2452d5e698ae"
+          },
+          {
+            "name": "CountComments",
+            "expression": "count('jsonplaceholder fact_comments'[id])",
+            "formatString": "0",
+            "lineageTag": "d9db32a7-a5eb-494c-b4c3-5360086c6271"
+          },
+          {
+            "name": "CountOfAb",
+            "expression": [
+              "",
+              "SUMX(",
+              "    'jsonplaceholder fact_posts',",
+              "    LEN('jsonplaceholder fact_posts'[body]) - LEN(SUBSTITUTE(LOWER('jsonplaceholder fact_posts'[body]), \"ab\", \"\"))",
+              ")/2",
+              ""
+            ],
+            "formatString": "0",
+            "lineageTag": "043af454-4745-49ea-993f-32f6dc8a3c1f"
+          },
+          {
+            "name": "CountOfAd",
+            "expression": [
+              "",
+              "SUMX(",
+              "    'jsonplaceholder fact_posts',",
+              "    LEN('jsonplaceholder fact_posts'[body]) - LEN(SUBSTITUTE(LOWER('jsonplaceholder fact_posts'[body]), \"ad\", \"\"))",
+              ")/2",
+              ""
+            ],
+            "formatString": "0",
+            "lineageTag": "357ab7a2-fe26-44f7-bf5c-194a7c5ac134"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "MeasuresTable",
+            "mode": "import",
+            "source": {
+              "expression": "Row(\"Column\", BLANK())",
+              "type": "calculated"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

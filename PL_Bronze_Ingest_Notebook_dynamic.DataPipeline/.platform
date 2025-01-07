@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "PL_Bronze_Ingest_Notebook_dynamic"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a058b775-e3a5-4e10-aa0d-5e03a0fbda05"
+  }
+}

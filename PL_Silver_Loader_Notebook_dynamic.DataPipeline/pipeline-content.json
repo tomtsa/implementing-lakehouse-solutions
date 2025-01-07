@@ -1,0 +1,132 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Silver Rules').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "8c7808f1-10a0-4805-ad39-c16f23a7c143",
+                "workspaceId": "00000000-0000-0000-0000-000000000000",
+                "parameters": {
+                  "__BRONZE_SCHEMA": {
+                    "value": {
+                      "value": "@item().BronzeSchema",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  },
+                  "__BRONZE_TABLE": {
+                    "value": {
+                      "value": "@item().BronzeTable",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  },
+                  "__SILVER_SCHEMA": {
+                    "value": {
+                      "value": "@item().SilverSchema",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  },
+                  "__SILVER_TABLE": {
+                    "value": {
+                      "value": "@item().SilverTable",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  },
+                  "__SILVER_TABLE_BK_COLUMNS": {
+                    "value": {
+                      "value": "@item().BusinessKeyColumns",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  },
+                  "__SILVER_TABLE_EXTRACT_COLUMNS": {
+                    "value": {
+                      "value": "@item().ExtractColumns",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  },
+                  "__SILVER_TABLE_EXCLUDE_COLUMNS": {
+                    "value": {
+                      "value": "@item().ExcludeColumns",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Run NB_Silver_Load",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "ForEach1",
+        "dependsOn": [
+          {
+            "activity": "Silver Rules",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource"
+          },
+          "datasetSettings": {
+            "type": "LakehouseTable",
+            "typeProperties": {
+              "schema": "jsonplaceholder",
+              "table": "silver"
+            },
+            "schema": [],
+            "linkedService": {
+              "name": "LH_Silver_Configuration",
+              "properties": {
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "artifactId": "3965e421-7487-4c59-9bcf-2054dcd3a015",
+                  "workspaceId": "00000000-0000-0000-0000-000000000000",
+                  "rootFolder": "Tables"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Silver Rules",
+        "dependsOn": []
+      }
+    ]
+  }
+}

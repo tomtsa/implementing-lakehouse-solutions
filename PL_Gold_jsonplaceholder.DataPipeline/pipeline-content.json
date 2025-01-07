@@ -1,0 +1,396 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "jsonplaceholder",
+                "table": "posts"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "LH_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "3be5845c-904d-40a6-b1a9-25c456b509ef",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "jsonplaceholder",
+                "table": "fact_posts"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "LH_Gold",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "cd316222-d360-4eae-a827-d9b0f26b1976",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "body",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "body",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "id",
+                  "type": "Int64",
+                  "physicalType": "long"
+                },
+                "sink": {
+                  "name": "id",
+                  "physicalType": "long"
+                }
+              },
+              {
+                "source": {
+                  "name": "title",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "title",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "userId",
+                  "type": "Int64",
+                  "physicalType": "long"
+                },
+                "sink": {
+                  "name": "userId",
+                  "physicalType": "long"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy posts",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "jsonplaceholder",
+                "table": "users"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "LH_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "3be5845c-904d-40a6-b1a9-25c456b509ef",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "jsonplaceholder",
+                "table": "dim_users"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "LH_Gold",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "cd316222-d360-4eae-a827-d9b0f26b1976",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "email",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "email",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "id",
+                  "type": "Int64",
+                  "physicalType": "long"
+                },
+                "sink": {
+                  "name": "id",
+                  "physicalType": "long"
+                }
+              },
+              {
+                "source": {
+                  "name": "name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "phone",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "phone",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "username",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "username",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "website",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "website",
+                  "physicalType": "string"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy users",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "jsonplaceholder",
+                "table": "comments"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "LH_Silver",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "3be5845c-904d-40a6-b1a9-25c456b509ef",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "jsonplaceholder",
+                "table": "fact_comments"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "LH_Gold",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "cd316222-d360-4eae-a827-d9b0f26b1976",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "body",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "body",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "email",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "email",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "id",
+                  "type": "Int64",
+                  "physicalType": "long"
+                },
+                "sink": {
+                  "name": "id",
+                  "physicalType": "long"
+                }
+              },
+              {
+                "source": {
+                  "name": "name",
+                  "type": "String",
+                  "physicalType": "string"
+                },
+                "sink": {
+                  "name": "name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "postId",
+                  "type": "Int64",
+                  "physicalType": "long"
+                },
+                "sink": {
+                  "name": "postId",
+                  "physicalType": "long"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy comments",
+        "dependsOn": []
+      }
+    ]
+  }
+}

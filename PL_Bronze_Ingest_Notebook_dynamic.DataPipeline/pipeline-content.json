@@ -1,0 +1,97 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Bronze Rules').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "TridentNotebook",
+              "typeProperties": {
+                "notebookId": "27299ea5-49d5-45e0-9ab5-5121a4eb88e3",
+                "workspaceId": "00000000-0000-0000-0000-000000000000",
+                "parameters": {
+                  "__DATA_ENTITY": {
+                    "value": {
+                      "value": "@item().Dataset",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  },
+                  "__API_URL": {
+                    "value": {
+                      "value": "@item().URL",
+                      "type": "Expression"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Run NB_Bronze_Ingest",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "ForEach1",
+        "dependsOn": [
+          {
+            "activity": "Bronze Rules",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource"
+          },
+          "datasetSettings": {
+            "type": "LakehouseTable",
+            "typeProperties": {
+              "schema": "restapi",
+              "table": "bronze"
+            },
+            "schema": [],
+            "linkedService": {
+              "name": "LH_Bronze_Configuration",
+              "properties": {
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "artifactId": "2eca48f5-1a3f-4ef0-acfb-4ff100aadba2",
+                  "workspaceId": "00000000-0000-0000-0000-000000000000",
+                  "rootFolder": "Tables"
+                },
+                "annotations": []
+              }
+            },
+            "annotations": []
+          },
+          "firstRowOnly": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Bronze Rules",
+        "dependsOn": []
+      }
+    ]
+  }
+}
