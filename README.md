@@ -1,6 +1,6 @@
 # Implementing lakehouse solutions
 
-A public repository for the Fabric Demo presented in the Hovi course: *Designing and Implementing Data Lakehouse Solutions*. This repostiory is used in the latter part of the demo: "Implementing Medallion Architecture".
+A public repository for the Fabric Demo presented in the Hovi course: **Designing and Implementing Data Lakehouse Solutions**. This repository is used in the latter part of the demo: **Implementing Medallion Architecture**.
 
 You can use this repository to see the codes and objects presented in the demo and return to them later if you are interested.
 
